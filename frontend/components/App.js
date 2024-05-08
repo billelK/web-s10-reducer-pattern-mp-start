@@ -43,7 +43,7 @@ const reducer = (state, action) => {
   // 👇 implement your reducer here using the action types above
   switch(action.type) {
     case CREATE_QUOTE :
-      return {...state, quotes:[...state.quotes,{id: getNextId(),quoteText: action.payload, authorName: action.payload}]}
+      return {...state, quotes:[...state.quotes, action.payload]}
     case DELETE_QUOTE :
       return {...state, quotes: state.quotes.filter(quote => quote.id !== action.payload)}
     case EDIT_QUOTE_AUTHENTICITY :
@@ -68,7 +68,8 @@ export default function App() {
   const createQuote = ({ authorName, quoteText }) => {
     // 👇 use the helper function above to create a new quote
     // 👇 and dispatch it over to the reducer
-    dispatch({type: CREATE_QUOTE, payload: {authorName, quoteText}})
+    let newQuote = {id: getNextId() ,quoteText ,authorName ,apocryphal: false}
+    dispatch({type: CREATE_QUOTE, payload: newQuote})
   }
   const deleteQuote = id => {
     // 👇 implement
@@ -84,7 +85,7 @@ export default function App() {
   }
   const toggleVisibility = () => {
     // 👇 implement
-    dispatch({type: EDIT_QUOTE_AUTHENTICITY})
+    dispatch({type: TOGGLE_VISIBILITY})
   }
 
   return (
@@ -97,6 +98,8 @@ export default function App() {
         editQuoteAuthenticity={editQuoteAuthenticity}
         setHighlightedQuote={setHighlightedQuote}
         toggleVisibility={toggleVisibility}
+        displayAllQuotes={state.displayAllQuotes}
+        highlightedQuote={state.highlightedQuotes}
       />
       <QuoteForm
         createQuote={createQuote}
