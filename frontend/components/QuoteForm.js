@@ -24,7 +24,7 @@ const reducer = (state,action) => {
       return state
   }
 }
-export default function TodoForm({createQuote = () => { }}) {
+export default function TodoForm({createQuote}) {
   // 👇 use the reducer hook to spin up state and dispatch
   const [state, dispatch] = useReducer(reducer, initialState)
   const onChange = ({target: {value,name}}) => {
@@ -39,6 +39,7 @@ export default function TodoForm({createQuote = () => { }}) {
   const onNewQuote = (e) => {
     // 👇 implement
     e.preventDefault()
+    console.log(state.authorName,state.quoteText);
     createQuote(state.authorName,state.quoteText)
     resetForm()
   }

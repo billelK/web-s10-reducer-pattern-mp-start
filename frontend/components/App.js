@@ -65,10 +65,11 @@ export default function App() {
   // 👇 use the reducer hook to spin up state and dispatch
   const [state,dispatch] = useReducer(reducer,initialState)
 
-  const createQuote = ({ authorName, quoteText }) => {
+  const createQuote = (authorName, quoteText) => {
     // 👇 use the helper function above to create a new quote
     // 👇 and dispatch it over to the reducer
     let newQuote = {id: getNextId() ,quoteText ,authorName ,apocryphal: false}
+    console.log(newQuote)
     dispatch({type: CREATE_QUOTE, payload: newQuote})
   }
   const deleteQuote = id => {
