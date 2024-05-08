@@ -8,7 +8,7 @@ const RESET_FORM = 'RESET_FORM'
 
 // 👇 create your reducer function here
 
-export default function TodoForm({ createQuote = () => { } }) {
+export default function TodoForm({ createQuote = () => { createQuote } }) {
   // 👇 use the reducer hook to spin up state and dispatch
 
   const onChange = () => {
@@ -17,8 +17,10 @@ export default function TodoForm({ createQuote = () => { } }) {
   const resetForm = () => {
     // 👇 implement
   }
-  const onNewQuote = () => {
+  const onNewQuote = (e) => {
+    e.preventDefault()
     // 👇 implement
+    createQuote()
     resetForm()
   }
 
